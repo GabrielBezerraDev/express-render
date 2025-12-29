@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2020",              /* Versão moderna do JS */
+    "module": "commonjs",            /* Padrão para Node.js */
+    "rootDir": "./src",              /* Onde fica seu código TS */
+    "outDir": "./dist",              /* Onde vai ficar o JS compilado */
+    "strict": true,                  /* Checagem rigorosa de tipos */
+    "esModuleInterop": true,         /* Permite importar módulos CommonJS */
+    "skipLibCheck": true,            /* Pula checagem de libs (evita erros chatos) */
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
