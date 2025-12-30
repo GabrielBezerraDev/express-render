@@ -22,7 +22,7 @@ interface ServerToClientEvents {
 // O que o Cliente (App) envia para o Servidor
 interface ClientToServerEvents {
   // Ex: "O App avisa: estou na posição tal"
-  atualizar_posicao: (dados: { id: string; lat: number; lng: number }) => void;
+  update_position: (data: { userId:string, lat: number; lng: number }) => void;
   
   // Ex: "O Admin pede: me dá a lista toda agora"
   solicitar_lista: () => void;
@@ -39,6 +39,8 @@ interface SocketData {
 const app = express();
 const server = http.createServer(app); // WebSocket precisa desse server cru
 const PORT = process.env.PORT || 3000;
+
+const dataInMemory: Record<string,any> = {};
 
 app.use(cors());
 app.use(express.json());
@@ -65,13 +67,21 @@ io.on("connection", (socket) => {
   console.log(`🔌 Cliente conectado: ${socket.id}`);
 
   // O App (React Native) mandou "atualizar_posicao"
-  socket.on("atualizar_posicao", (dados) => {
-    console.log(`📦 Palete ${dados.id} moveu para:`, dados.lat, dados.lng);
+  socket.on("update_position", (data) => {
+    // console.log(`📦 Palete ${dados.id} moveu para:`, dados.lat, dados.lng);
+    console.log("Dados do Front: ", data);  
+    
+    dataInMemory[`${data.userId}`] = {
+      lat: data.lat,
+      lng: data.lng
+    }
 
     // O Servidor replica isso para TODOS (Broadcast) -> O Admin vê mexendo
     // socket.broadcast.emit envia para todos MENOS quem mandou
     // io.emit envia para TODOS (incluindo quem mandou)
-    socket.broadcast.emit("palete_movimentado", dados);
+    // socket.broadcast.emit("palete_movimentado", dados);
+
+    
   });
 
   
