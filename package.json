@@ -4,10 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^7.2.0",
+    "@supabase-js/source": "supabase/supabase-js",
+    "@supabase/supabase-js": "^2.89.0",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "socket.io": "^4.8.3"
+    "jsonwebtoken": "^9.0.3",
+    "prisma": "^7.2.0",
+    "socket.io": "^4.8.3",
+    "zod": "^4.3.5"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -15,8 +22,10 @@
     "start": "node dist/server.js"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.0.3",
     "@types/socket.io": "^3.0.2",
     "tsx": "^4.21.0",
